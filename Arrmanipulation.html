@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>
+            <head>Array manipulation</head>
+        </title>
+    </head>
+    <body>
+        <script>
+
+function flat(arr) {
+    var result = [];
+    recFlat(arr);
+    function recFlat(subArray) {        //recursive function
+        for (var i = 0; i < subArray.length; i++) {
+            if (Array.isArray(subArray[i])) {   //checking that the element at arr[i] is array or not?
+                recFlat(subArray[i]);   //callig the recursive function
+            } else {
+                result.push(subArray[i]);   //if not array then push into result array
+            }
+        }
+    }
+
+    
+    return result;
+}
+
+var arr = [1, 2, 3, [4, 5, 6, [7, 8, [9, 10]]]];
+var flattedArray = flat(arr);
+
+console.log(flattedArray);
+
+
+        </script>
+    </body>
+</html>

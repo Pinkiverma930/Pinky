@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>fetch api</title>
+        <style>
+            div
+            {
+                color:red;
+            }
+        </style>
+    </head>
+    <body>
+        <table border="3">
+            <th>Title</th>
+            <tbody id="tb"></tbody>
+        </table>
+        <div id="error"></div>
+        <script>
+
+let recordslimit = 5;     //setting the limit of records 
+let newarr=[];
+            var tbby=document.getElementById('tb');
+            var diverror = document.getElementById('error');
+            const apiUrl = `http://jsonplaceholder.typicode.com/posts?_limit=${recordslimit}`;
+                fetch(apiUrl)           //fetching api
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        const tableRows = data.map((ele, index) => { //creating table row dynamically
+                            newarr[index]=`${ele.title}`;
+                            return `<tr>
+                                <td><b>${ele.title}</b></td>        
+                               </tr>`
+                               
+                        }).join('');
+                        console.log(newarr);
+                        tbby.innerHTML = tableRows;     //inserting row in table
+                    })
+                    .catch((error)=>
+                    {
+                        diverror.innerHTML = "Something went wrong please try again";
+                        console.log("Something went wrong please try again")
+                    });
+           
+        </script>
+    </body>
+</html>
